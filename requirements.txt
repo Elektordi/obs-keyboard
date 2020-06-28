@@ -1,0 +1,2 @@
+evdev
+obs-websocket-py
