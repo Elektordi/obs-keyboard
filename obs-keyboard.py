@@ -27,9 +27,9 @@ for s in scenes.getScenes()[:10]:
     next_key += 1
 
 #keys["KEY_NUMERIC_A"] = None
-#keys["KEY_NUMERIC_B"] = None
-#keys["KEY_NUMERIC_C"] = None
-keys["KEY_NUMERIC_D"] = requests.TransitionToProgram(None)
+keys["KEY_NUMERIC_B"] = requests.TransitionToProgram({'name': 'Fondu'})
+keys["KEY_NUMERIC_C"] = requests.TransitionToProgram({'name': 'Stinger'})
+keys["KEY_NUMERIC_D"] = requests.TransitionToProgram({'name': 'Coupure'})
 
 #keys["KEY_NUMERIC_STAR"] = None
 #keys["KEY_NUMERIC_POUND"] = None
