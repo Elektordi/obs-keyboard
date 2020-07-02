@@ -20,11 +20,25 @@ ws = obsws(host, port, password)
 ws.connect()
 
 keys = {}
-next_key = 0
 scenes = ws.call(requests.GetSceneList())
-for s in scenes.getScenes()[:10]:
-    keys["KEY_NUMERIC_%d" % (next_key)] = requests.SetPreviewScene(s['name'])
-    next_key += 1
+
+for s in scenes.getScenes():
+    if not ":" in s['name']:
+        continue
+    i = s['name'].split(":")[0]
+    if not i.isnumeric():
+        continue
+    i = int(i)
+    if i>=10:
+        continue
+    keys["KEY_NUMERIC_%d" % (i)] = requests.SetPreviewScene(s['name'])
+
+if not keys:
+    print("No prefixes in scenes, fallback to scenes order.")
+    next_key = 0
+    for s in scenes.getScenes()[:10]:
+        keys["KEY_NUMERIC_%d" % (next_key)] = requests.SetPreviewScene(s['name'])
+        next_key += 1
 
 #keys["KEY_NUMERIC_A"] = None
 keys["KEY_NUMERIC_B"] = requests.TransitionToProgram({'name': 'Fondu'})
